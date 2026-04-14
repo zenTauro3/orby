@@ -3,8 +3,6 @@ import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 import { RedisModule } from './common/redis/redis.module';
 import { PrismaModule } from './prisma/prisma.module';
-import { AgentsModule } from './agents/agents.module';
-import { BillingModule } from './billing/billing.module';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 
@@ -38,8 +36,6 @@ import { AuthModule } from './modules/auth/auth.module';
     RedisModule,
     UsersModule,
     AuthModule,
-    AgentsModule,
-    BillingModule,
   ],
 })
 export class AppModule {}
