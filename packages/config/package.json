@@ -1,0 +1,14 @@
+{
+  "name": "@orby/config",
+  "version": "0.0.1",
+  "private": true,
+  "exports": {
+    "./tsconfig.base.json": "./tsconfig.base.json",
+    "./eslint": "./eslint.config.base.js"
+  },
+  "scripts": {
+    "build": "echo 'Nothing to build in @orby/config'",
+    "lint": "echo 'Nothing to lint in @orby/config'",
+    "test": "echo 'Nothing to test in @orby/config'"
+  }
+}

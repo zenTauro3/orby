@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"console.log\\(process.env.PATH\\)\")",
+      "Read(//home/jaume/.local/share/**)",
+      "Read(//home/jaume/node_modules/.bin/**)",
+      "Read(//usr/local/**)",
+      "Bash(command -v npm)",
+      "Bash(npm root:*)",
+      "Bash(/usr/local/lib/node_modules/corepack/shims/pnpm --version)",
+      "Bash(COREPACK_ENABLE_STRICT=0 /usr/local/lib/node_modules/corepack/shims/pnpm install)",
+      "Bash(COREPACK_ENABLE_STRICT=0 /usr/local/lib/node_modules/corepack/shims/pnpm approve-builds)",
+      "Bash(COREPACK_ENABLE_STRICT=0 timeout 35s /usr/local/lib/node_modules/corepack/shims/pnpm dev --filter @orby/types --filter @orby/ui)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(corepack enable:*)",
+      "Bash(pnpm --version)",
+      "Bash(sudo corepack:*)",
+      "Bash(npm install:*)",
+      "Bash(mkdir -p ~/.local/bin)",
+      "Bash(cat)",
+      "Bash(chmod +x ~/.local/bin/pnpm)",
+      "Bash(export PATH=\"$HOME/.local/bin:$PATH\")",
+      "Bash(pnpm build:*)",
+      "Bash(timeout 30s ./node_modules/.bin/turbo dev --ui=stream)",
+      "Bash(pnpm install:*)",
+      "Bash(timeout 40s ./node_modules/.bin/turbo dev --ui=stream)",
+      "Bash(timeout 15s node_modules/.bin/nest start --watch)",
+      "Bash(timeout 20s node_modules/.bin/nest start --watch)"
+    ]
+  }
+}
