@@ -9,7 +9,10 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "incremental": true,
-    "tsBuildInfoFile": "./dist/.tsbuildinfo"
+    "tsBuildInfoFile": "./dist/.tsbuildinfo",
+     "paths": {
+      "@orby/types": ["../../packages/types/src/index.ts"]
+    },
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "test", "**/*spec.ts"]
