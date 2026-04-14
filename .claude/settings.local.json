@@ -25,7 +25,12 @@
       "Bash(pnpm install:*)",
       "Bash(timeout 40s ./node_modules/.bin/turbo dev --ui=stream)",
       "Bash(timeout 15s node_modules/.bin/nest start --watch)",
-      "Bash(timeout 20s node_modules/.bin/nest start --watch)"
+      "Bash(timeout 20s node_modules/.bin/nest start --watch)",
+      "Bash(pnpm --filter @orby/api add passport passport-jwt bcrypt redis)",
+      "Bash(pnpm --filter @orby/api add -D @types/passport-jwt @types/bcrypt)",
+      "Bash(pnpm prisma:*)",
+      "Bash(pnpm --filter @orby/api build)",
+      "Bash(pnpm --filter @orby/api add -D @types/express)"
     ]
   }
 }

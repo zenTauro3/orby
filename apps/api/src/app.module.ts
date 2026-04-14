@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
+import { RedisModule } from './common/redis/redis.module';
 import { PrismaModule } from './prisma/prisma.module';
-import { AuthModule } from './auth/auth.module';
 import { AgentsModule } from './agents/agents.module';
 import { BillingModule } from './billing/billing.module';
+import { UsersModule } from './modules/users/users.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -19,6 +21,7 @@ import { BillingModule } from './billing/billing.module';
         DATABASE_URL: Joi.string().required(),
         REDIS_URL: Joi.string().default('redis://localhost:6379'),
         JWT_SECRET: Joi.string().required().min(16),
+        JWT_REFRESH_SECRET: Joi.string().required().min(16),
         ANTHROPIC_API_KEY: Joi.string().optional(),
         GOOGLE_CLIENT_ID: Joi.string().optional(),
         GOOGLE_CLIENT_SECRET: Joi.string().optional(),
@@ -32,6 +35,8 @@ import { BillingModule } from './billing/billing.module';
       },
     }),
     PrismaModule,
+    RedisModule,
+    UsersModule,
     AuthModule,
     AgentsModule,
     BillingModule,
