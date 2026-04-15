@@ -1,11 +1,17 @@
 {
   "extends": "@orby/config/tsconfig.base.json",
   "compilerOptions": {
+    "jsx": "react-jsx",           
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "jsx": "react-jsx",
-    "outDir": "dist",
-    "rootDir": "src"
+    "moduleResolution": "Bundler",  
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "noEmit": false,                
+    "paths": {
+      "@orby/types": ["../../packages/types/src/index.ts"]
+    }
   },
-  "include": ["src"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

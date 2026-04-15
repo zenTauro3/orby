@@ -1,32 +1,24 @@
-import 'reflect-metadata';
-import { NestFactory } from '@nestjs/core';
-import { ValidationPipe, Logger } from '@nestjs/common';
-import { AppModule } from './app.module';
+import { NestFactory } from '@nestjs/core'
+import { Logger } from '@nestjs/common'
+import { ConfigService } from '@nestjs/config'
+import { AppModule } from './app.module'
 
 async function bootstrap() {
-  const logger = new Logger('Bootstrap');
-  const app = await NestFactory.create(AppModule, {
-    logger: ['error', 'warn', 'log', 'debug'],
-  });
+  const app = await NestFactory.create(AppModule)
+  const logger = new Logger('Bootstrap')
+  const configService = app.get(ConfigService)
 
-  app.setGlobalPrefix('api/v1');
+  const port = configService.getOrThrow<number>('PORT')
+  const frontendUrl = configService.getOrThrow<string>('FRONTEND_URL')
 
+  app.setGlobalPrefix('api')
   app.enableCors({
-    origin: process.env['FRONTEND_URL'] ?? 'http://localhost:3000',
+    origin: frontendUrl,
     credentials: true,
-  });
+  })
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      transform: true,
-      forbidNonWhitelisted: true,
-    }),
-  );
-
-  const port = process.env['PORT'] ?? 4000;
-  await app.listen(port);
-  logger.log(`orby API running on http://localhost:${port}/api/v1`);
+  await app.listen(port)
+  logger.log(`API corriendo en http://localhost:${port}/api`)
 }
 
-bootstrap();
+bootstrap()

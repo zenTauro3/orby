@@ -1,88 +1,17 @@
-// ─── User ─────────────────────────────────────────────────────────────────────
+export * from './enums'
 
-export type UserRole = 'OWNER' | 'ADMIN' | 'MEMBER';
+export * from './entities/user.types'
+export * from './entities/company.types'
+export * from './entities/agent.types'
+export * from './entities/invoice.types'
+export * from './entities/conversation.types'
+export * from './entities/message.types'
 
-export interface IUser {
-  id: string;
-  email: string;
-  name: string;
-  companyId: string;
-  role: UserRole;
-  createdAt: Date;
-  updatedAt: Date;
-}
+export * from './api/common.types'
+export * from './api/auth.types'
+export * from './api/company.types'
+export * from './api/agent.types'
 
-// ─── Company ──────────────────────────────────────────────────────────────────
-
-export type CompanyPlan = 'FREE' | 'STARTER' | 'PRO' | 'ENTERPRISE';
-
-export interface ICompany {
-  id: string;
-  name: string;
-  slug: string;
-  plan: CompanyPlan;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-// ─── Agent ────────────────────────────────────────────────────────────────────
-
-export type AgentType = 'SALES' | 'SUPPORT' | 'ONBOARDING' | 'CUSTOM';
-
-export interface IAgent {
-  id: string;
-  name: string;
-  description?: string;
-  type: AgentType;
-  isActive: boolean;
-  companyId: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-// ─── Invoice ──────────────────────────────────────────────────────────────────
-
-export type InvoiceStatus =
-  | 'DRAFT'
-  | 'OPEN'
-  | 'PAID'
-  | 'VOID'
-  | 'UNCOLLECTIBLE';
-
-export interface IInvoice {
-  id: string;
-  companyId: string;
-  amount: number;
-  currency: string;
-  status: InvoiceStatus;
-  stripeInvoiceId?: string;
-  dueDate: Date;
-  paidAt?: Date;
-  createdAt: Date;
-}
-
-// ─── Conversation ─────────────────────────────────────────────────────────────
-
-export type ConversationStatus = 'ACTIVE' | 'CLOSED' | 'PENDING';
-
-export interface IConversation {
-  id: string;
-  agentId: string;
-  companyId: string;
-  externalId?: string;
-  status: ConversationStatus;
-  createdAt: Date;
-  updatedAt: Date;
-}
-
-// ─── Message ──────────────────────────────────────────────────────────────────
-
-export type MessageRole = 'USER' | 'ASSISTANT' | 'SYSTEM';
-
-export interface IMessage {
-  id: string;
-  conversationId: string;
-  role: MessageRole;
-  content: string;
-  createdAt: Date;
-}
+export * from './domain/agent-personality.types'
+export * from './domain/billing.types'
+export * from './domain/websocket.types'
