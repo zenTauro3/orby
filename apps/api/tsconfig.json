@@ -7,12 +7,13 @@
     "moduleResolution": "Node16",
     "outDir": "./dist",
     "rootDir": "./src",
+    "composite": true,
     "incremental": true,
     "tsBuildInfoFile": "./dist/.tsbuildinfo",
     "paths": {
-      "@common/*": ["./src/common/*"],
+      "@common/*":  ["./src/common/*"],
       "@modules/*": ["./src/modules/*"],
-      "@core/*": ["./src/core/*"]
+      "@core/*":    ["./src/core/*"]
     }
   },
   "include": ["src/**/*"],

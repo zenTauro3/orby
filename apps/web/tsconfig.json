@@ -2,19 +2,21 @@
   "extends": "@orby/config/tsconfig.base.json",
   "compilerOptions": {
     "jsx": "preserve",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"], 
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "moduleResolution": "Bundler", 
+    "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
-    "noEmit": true,             
+    "noEmit": true,
     "paths": {
-      "@orby/types":     ["../../packages/types/src/index.ts"],
-      "@components/*":   ["./src/components/*"],
-      "@lib/*":          ["./src/lib/*"],
-      "@hooks/*":        ["./src/hooks/*"],
-      "@store/*":        ["./src/store/*"]
+      "@components/*": ["./src/components/*"],
+      "@lib/*":        ["./src/lib/*"],
+      "@hooks/*":      ["./src/hooks/*"],
+      "@store/*":      ["./src/store/*"]
     }
   },
   "include": ["src/**/*", "next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", ".next"]
+  "exclude": ["node_modules", ".next"],
+  "references": [
+    { "path": "../../packages/types" }
+  ]
 }

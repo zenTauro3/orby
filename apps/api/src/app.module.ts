@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common'
 import { APP_GUARD, APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
 import { ConfigModule } from '@nestjs/config'
 import { ValidationPipe } from '@nestjs/common'
-import * as Joi from 'joi'
+import Joi from 'joi'
 
 import { PrismaModule } from '@core/prisma/prisma.module'
 import { RedisModule } from '@core/redis/redis.module'
