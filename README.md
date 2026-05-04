@@ -1,75 +1,74 @@
 # Orby
 
-Plataforma SaaS de automatización empresarial con IA. Monorepo gestionado con **pnpm workspaces** + **Turborepo**.
+AI-powered enterprise automation SaaS platform. Monorepo managed with **pnpm workspaces** + **Turborepo**.
 
 ## Stack
 
-| Capa | Tecnología |
-|------|-----------|
+| Layer    | Technology                                            |
+| -------- | ----------------------------------------------------- |
 | Frontend | Next.js 15 (App Router) + Tailwind CSS v4 + shadcn/ui |
-| Backend | NestJS 10 con SWC compiler |
-| Base de datos | PostgreSQL 16 vía Prisma ORM |
-| Caché | Redis 7 |
-| Build | Turborepo + pnpm workspaces |
-| CI/CD | GitHub Actions |
+| Backend  | NestJS 10 with SWC compiler                           |
+| Database | PostgreSQL 16 via Prisma ORM                          |
+| Cache    | Redis 7                                               |
+| Build    | Turborepo + pnpm workspaces                           |
+| CI/CD    | GitHub Actions                                        |
 
-## Estructura
+## Structure
 
-```
 orby/
 ├── apps/
-│   ├── web/          → Next.js 15 (puerto 3000)
-│   └── api/          → NestJS (puerto 4000)
+│ ├── web/ → Next.js 15 (port 3000)
+│ └── api/ → NestJS (port 4000)
 ├── packages/
-│   ├── types/        → @orby/types — interfaces compartidas
-│   ├── ui/           → @orby/ui — componentes React base
-│   └── config/       → @orby/config — tsconfig + eslint base
+│ ├── types/ → @orby/types — shared interfaces
+│ ├── ui/ → @orby/ui — base React components
+│ └── config/ → @orby/config — tsconfig + eslint base
 ├── turbo.json
 ├── pnpm-workspace.yaml
 └── docker-compose.yml
-```
 
 ## Prerequisites
 
 - **Node.js** >= 20
 - **pnpm** >= 10 (`npm install -g pnpm`)
-- **Docker** + **Docker Compose** (para la base de datos local)
+- **Docker** + **Docker Compose** (for local database)
 
-## Instalación
+## Installation
 
 ```bash
-# 1. Clonar el repo
+# 1. Clone the repo
 git clone <url> orby && cd orby
 
-# 2. Copiar variables de entorno
-cp .env.example .env                  # edita con tus valores reales
-cp .env.example apps/api/.env         # la API carga .env desde su directorio
+# 2. Copy environment variables
+cp .env.example .env
+cp apps/api/.env.example apps/api/.env
+cp apps/web/.env.example apps/web/.env.local
 
-# 3. Instalar dependencias (genera Prisma client automáticamente)
+# 3. Install dependencies (generates Prisma client automatically)
 pnpm install
 ```
 
-## Desarrollo
+## Development
 
 ```bash
-# Levantar infraestructura (PostgreSQL + Redis)
+# Start infrastructure (PostgreSQL + Redis)
 docker compose up -d
 
-# Ejecutar migraciones de base de datos (primera vez)
+# Run database migrations (first time only)
 pnpm --filter @orby/api db:migrate
 
-# Arrancar todos los servicios en paralelo
+# Start all services in parallel
 pnpm dev
 ```
 
-Los servicios estarán disponibles en:
+Services will be available at:
+
 - **Web**: http://localhost:3000
 - **API**: http://localhost:4000/api/v1
 
 ## Build
 
 ```bash
-# Build de todos los paquetes/apps (Turbo gestiona el orden)
 pnpm build
 ```
 
@@ -85,41 +84,41 @@ pnpm test
 pnpm lint
 ```
 
-## Docker (desarrollo local)
+## Docker (local development)
 
 ```bash
-# Iniciar servicios
+# Start services
 docker compose up -d
 
-# Ver logs
+# View logs
 docker compose logs -f
 
-# Parar servicios
+# Stop services
 docker compose down
 
-# Parar y eliminar volúmenes (¡borra los datos!)
+# Stop and remove volumes (⚠️ deletes all data)
 docker compose down -v
 ```
 
-## Variables de entorno
+## Environment Variables
 
-Copia `.env.example` a `.env` y rellena los valores. Las variables **críticas** para arrancar:
+Copy `.env.example` to `.env` and fill in the values. **Critical** variables to get started:
 
-| Variable | Descripción |
-|----------|-------------|
-| `DATABASE_URL` | Conexión a PostgreSQL |
-| `JWT_SECRET` | Secreto para firmar JWT (mín. 32 chars) |
-| `ANTHROPIC_API_KEY` | API key de Claude |
-| `STRIPE_SECRET_KEY` | Clave secreta de Stripe |
-| `NEXT_PUBLIC_API_URL` | URL de la API (consumida por el frontend) |
+| Variable              | Description                        |
+| --------------------- | ---------------------------------- |
+| `DATABASE_URL`        | PostgreSQL connection string       |
+| `JWT_SECRET`          | JWT signing secret (min. 32 chars) |
+| `ANTHROPIC_API_KEY`   | Claude API key                     |
+| `STRIPE_SECRET_KEY`   | Stripe secret key                  |
+| `NEXT_PUBLIC_API_URL` | API URL (consumed by the frontend) |
 
 ## Turborepo Remote Cache
 
-Para activar la caché remota de Turbo:
+To enable Turbo remote cache:
 
 ```bash
 npx turbo login
 npx turbo link
 ```
 
-O configura `TURBO_TOKEN` y `TURBO_TEAM` en los secrets de GitHub Actions.
+Or set `TURBO_TOKEN` and `TURBO_TEAM` in your GitHub Actions secrets.
